@@ -13,7 +13,8 @@ input signed [psum_bw-1:0] in;
 output signed [psum_bw-1:0] out;
 
 reg signed [psum_bw-1:0] psum_q;
-assign out = psum_q;
+//assign out = (psum_q > 16'b0)? psum_q : 16'b0;
+assign out = (psum_q[psum_bw-1]==0)? psum_q : 16'b0;
 
 wire relu;
 assign relu = 1;

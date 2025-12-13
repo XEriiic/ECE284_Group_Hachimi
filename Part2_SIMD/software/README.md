@@ -1,8 +1,4 @@
 Part2_SIMD software folder
 
-Place software artifacts here (notebooks, trained model files, scripts):
-- `VGG16_Quantization_Aware_Training.ipynb` (include 2-bit activation and 4-bit weight variants)
-- `VGG16_Quantization_Aware_Training.pdf`
-- `misc/` for helper scripts and data processing utilities
-
-- Include instructions to reproduce results (dependencies, commands) if non-standard.
+- Part2_16x16_conf1 is for the first configuration which computes the 4 bit act 4 bit weight case. This generates the txt files in txt_conf_one which is used to test the 4 bit act 4 bit weight case. You will need to import the python files from the model_part2 file to train the VGGNet with the 8x8 convolutional layer in the VGGNet's 27th index of features.
+- Part2_16x16_conf0 is the VGG16_Quantization_Aware_Training notebook. It is used to generate the txt files in txt_conf_zero used for testing the tiled convolutional layer with 16x16 convolutional layer in the VGGNet's 27th index of features. You will need to import the python files from the model_part2 file to train the VGGNet version with the 16x16 convolutional layer.

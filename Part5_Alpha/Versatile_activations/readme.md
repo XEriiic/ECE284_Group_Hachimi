@@ -29,7 +29,7 @@ Soft shrinkage is an activation function which zero's out a symmetrical region a
 
 However, we cannot apply the floating point lambda as the threshold to use in our design. Therefore, we will need to find the equivalent λ in the quantized domain to apply to the quantized output feature map. To find this threshold which we use as our thresh_val parameter in the sfp module, we need to find an integer c such that:
 
-\[
+$$
 T
 <
 \left|
@@ -45,12 +45,12 @@ c
 \left( \frac{\alpha_{w}}{2^{\alpha_w - 1} - 1} \right)
 \right|
 \quad (1)
-\]
+$$
 
 This can be achieved by this operation 
-\[
+$$
 \lambda_{\text{int}} = \text{round}\left(\frac{\lambda}{\Delta_{\text{out}}}\right)
-\]
+$$
 
 This is emulated in the alpha_soft_shrink notebook using this function:
 

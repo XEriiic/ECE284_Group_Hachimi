@@ -16,7 +16,7 @@ After in-place accumulation:
 #### Total Reduction of clock cycles: [{(input channels) x (number of output features) + (input channels) + 2} - {(number of output features) + 2}] = (input channels - 1) x (number of output features) + (input channels)
 
 ## Implementation in Hardware:
-The hardware implements in-place accumulation by using a control bit called "hold_cq". It is named this weight because in the output stationary configuration of part3's design, cq holds the psums. when hold_cq = 1 applying reset = 1 to flush out the contents in the ififo's and the bq and aq registers does not flush out the contents in the cq register and allows it to accumulate accross all the input channels being processed. This has already been implemented in part3's design. We have added the mac_tile.v and corelet.v files from part3 to this folder for inspection. We note that in the corelet.v file a control bit called "mac_deliver" controls when all the accumulated output features are finally sent down to the ofifo. When this is the case, out_s is assigned to c_q and in_n latches to the port of cq to begin transporting the output feature data from the north to the southernmost cq and then to the ofifo.
+The hardware implements in-place accumulation by using a control bit called "hold_cq". It is named this weight because in the output stationary configuration of part3's design, cq holds the psums. when hold_cq = 1 applying reset = 1 when mac_tile_version == 1 (which means we are in the output stationary configuration) to flush out the contents in the ififo's and the bq and aq registers does not flush out the contents in the cq register and allows it to accumulate accross all the input channels being processed. This has already been implemented in part3's design. We have added the mac_tile.v and corelet.v files from part3 to this folder for inspection. We note that in the corelet.v file a control bit called "mac_deliver" controls when all the accumulated output features are finally sent down to the ofifo. When this is the case, out_s is assigned to c_q and in_n latches to the port of cq to begin transporting the output feature data from the north to the southernmost cq and then to the ofifo.
 
 This is the code in the testbench used to begin transportation of the contents in the cq registers to the ofifo:
 ```
@@ -30,4 +30,15 @@ for (i=0; i<row; i=i+1) begin
     #0.5 clk = 1'b0; mac_deliver = 0;
     #0.5 clk = 1'b1;   
 /////////////////////////////////////////////////////////
+```
+
+and this is how the control logic for hold_cq is implemented in mac_tile to hold cq's contents:
+
+```
+ if (reset) begin
+        inst_q <= 2'b00;
+        load_ready_q <= 1'b1;
+        a_q <= 0;
+        b_q <= 0;
+        c_q <= (mac_tile_version == 1 && hold_cq == 1) ? c_q : 0;
 ```

@@ -2,6 +2,9 @@
 
 ![Folder structure preview](images/folder_structure.svg)
 
+This Project was completed by Ziyi Xiao and Hamad Alajeel
+
+
 ## Important: Submission structure and naming
 - Your submission must be a single ZIP file named exactly: `ECE284_Team_<Teamname>.zip`.
 - The ZIP must preserve the directory layout shown below. Not following the structure can incur up to a 15% penalty.

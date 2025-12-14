@@ -48,9 +48,8 @@ c
 $$
 
 This can be achieved by this operation 
-$$
-\lambda_{\text{int}} = \text{round}\left(\frac{\lambda}{\Delta_{\text{out}}}\right)
-$$
+
+$$\lambda_{\text{int}} = \text{round}\left(\frac{\lambda}{\Delta_{\text{out}}}\right)$$
 
 This is emulated in the alpha_soft_shrink notebook using this function:
 

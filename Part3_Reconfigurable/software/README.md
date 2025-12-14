@@ -4,7 +4,7 @@ The ece284_part3 notebook contains the required python code to train a quantized
 
 - Each row in the mac represents a feature in the output feature mape
  - Each column is the output channel of that feature in the output feature map
- - The time for loading weights is equal to 3, because we have a set of 3 input channels to sum over to produce the output feature map
+ - The time for loading weights and activations to the fifo's is equal to 3, because we have a set of 3 input channels to sum over to produce the output feature map
  - Each row in the Mac has to be the window of convolution over the activatino map which maps to the respective output feature in the output feature map, so row 1 is o_nij = 0 and row 8 is o_nij = 7. The time for each PE represents the index of the activation that is multiplied with the respective kij for that convolution operation.
  - The weight file contains rows that represent each kij from kij = 0 to kij = 8 for each of the output channels, 0 to 8.
 

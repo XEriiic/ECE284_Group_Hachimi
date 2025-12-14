@@ -95,7 +95,7 @@ class QuantConv2d(nn.Conv2d):
                                           bias)
         self.layer_type = 'QuantConv2d'
         self.bit = 4
-        self.act_bit = 2
+        self.act_bit = 4
         self.weight_quant = weight_quantize_fn(w_bit=self.bit)
         self.act_alq = act_quantization(self.act_bit) # changed from 4 to 2 for activation quantization used to be 
         self.act_alpha = torch.nn.Parameter(torch.tensor(8.0))
@@ -151,3 +151,4 @@ class TrainableSoftshrink(nn.Module):
         out += mask2.float() * (x + lambd_int)
 
         return out
+
